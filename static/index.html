@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-theme.min.css">
+    <script src="/static/vue.js"></script>
+    <script src="/static/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>Hello App!</h1>
+    <p>
+        <!-- 使用指令 v-link 进行导航。 -->
+        <a v-link="{ path: '/foo' }">Go to Foo</a>
+        <a v-link="{ path: '/bar' }">Go to Bar</a>
+        <a v-link="{ path: '/foo/bar' }">Go to Foo/Bar</a>
+    </p>
+    <!-- 路由外链 -->
+    <router-view></router-view>
+</div>
+<script>
+    var Foo=Vue.extend({
+        template:'<div class="foo">' +
+        '<h2>This is Foo!</h2>' +
+        '<router-view></router-view>' + // <- 嵌套的外链
+        '</div>'
+    });
+    var Bar=Vue.extend({
+        template:'<div>' +
+        '<p>当前路径: {{$route.path}}</p>'+
+        '<p>当前路由参数: {{$route.params | json}}</p>'+
+        '<p>This is bar!</p>' +
+        '</div>'
+    });
+    var App=Vue.extend({});
+    var router=new VueRouter();
+    router.map({
+        '/foo':{
+            component:Foo,
+            subRoutes:{
+                '/':{
+                    component:{
+                        template:'<p>default view of Foo</p>'
+                    }
+                },
+                'bar':{
+                    component:Bar
+                }
+            },
+            auth:true
+        },
+        'bar':({
+            component:Bar
+        }),
+        '/user/:username': {
+            component: {
+                template: '<p>用户名是{{$route.params.username}}</p>'
+            }
+        }
+    });
+    router.start(App,"#app");
+    router.beforeEach(function (transition) {
+        console.log(transition);
+        console.log("fromAuth:"+transition.from.auth);
+        console.log("toAuth:"+transition.to.auth);
+        transition.next();
+    })
+</script>
+</body>
+</html>
