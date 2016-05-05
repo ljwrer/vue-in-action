@@ -25,14 +25,66 @@
         template:'<div class="foo">' +
         '<h2>This is Foo!</h2>' +
         '<router-view></router-view>' + // <- 嵌套的外链
-        '</div>'
+        '</div>',
+        data:function () {
+            return {
+                a:0,
+                b:0
+            }
+        },
+        route: {
+            canActivate:function ({next}) {
+                console.log("can active")
+                setTimeout(next,100)
+            },
+            canDeactivate: function (transition) {
+                console.log('can deactivated!')
+                transition.next()
+            },
+            activate: function () {
+                console.log('foo activating!')
+                return new Promise(function (resolve,reject) {
+                    setTimeout(function () {
+                        console.log("foo activated");
+                        resolve();
+                    },200)
+                })
+            },
+            data:function ({next}) {
+                console.log("data");
+                console.log(this.$data.a);
+                next({
+                    a:1,
+                    b:2
+                })
+            },
+            deactivate: function (transition) {
+                console.log('foo deactivated!')
+                transition.next()
+            }
+        }
     });
     var Bar=Vue.extend({
+        data:function () {
+            return {
+                c:0
+            }
+        },
         template:'<div>' +
-        '<p>当前路径: {{$route.path}}</p>'+
-        '<p>当前路由参数: {{$route.params | json}}</p>'+
-        '<p>This is bar!</p>' +
-        '</div>'
+        '<div v-if="$loadingRouteData">Loading ...</div>'+
+        '<div v-if="!$loadingRouteData">' +
+            '<p>当前路径: {{$route.path}}</p>'+
+            '<p>当前路由参数: {{$route.params | json}}</p>'+
+            '<p>This is bar!</p>' +
+        '</div>'+
+        '</div>',
+        route:{
+            data:function ({next}) {
+                console.log("data");
+                console.log(this.$data.c);
+                setTimeout(next.bind(this,{c:1}),500);
+            },
+        }
     });
     var App=Vue.extend({});
     var router=new VueRouter();
