@@ -9,14 +9,14 @@ const state={
     amount:0
 };
 const mutations={
-    'INCREMENT'(state){
+    INCREMENT(state){
         state.count+=(state.amount===0?1:state.amount);
     },
-    'DECREMENT'(state){
+    DECREMENT(state){
         state.count-=(state.amount===0?1:state.amount);
     },
-    'UPDATEAMOUNT'(state,amount){
-        state.amount=amount
+    UPDATEAMOUNT(state,mutations){
+        state.amount=mutations.amount
     }
 };
 const store=new Vuex.Store({

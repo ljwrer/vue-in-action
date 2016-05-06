@@ -9,5 +9,10 @@ export const decrementCounter=function ({dispatch}) {
     dispatch('DECREMENT')
 };
 export  const updateAmount=function ({dispatch},e) {
-    dispatch('UPDATEAMOUNT',~~e.target.value)
+    dispatch({
+        type:'UPDATEAMOUNT',
+        payload:{
+            amount:~~e.target.value
+        }
+    })
 };
