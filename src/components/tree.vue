@@ -12,18 +12,14 @@
   </li>
 </template>
 <script type="text/babel">
-  import tree from './tree'
   export default{
+    name:"tree",
     data(){
       return {}
     },
     props: {
       model: Object
-    },
-    components: {
-      tree
     }
-    //TODO tree变为fragment
   }
 </script>
 <style type="text/css">
