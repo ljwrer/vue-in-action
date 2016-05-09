@@ -3,7 +3,8 @@
         <hello v-if="show.hello"></hello>
         <forms v-if="show.forms"></forms>
         <counter v-if="show.counter"></counter>
-        <tree v-if="show.tree" :model="data"></tree>
+        <tree v-if="show.tree" :model="treeData"></tree>
+        <Tab :links="links"></Tab>
     </div>
 </template>
 
@@ -13,9 +14,11 @@
     import counter from './components/counter'
     import store from './vuex/store'
     import tree from './components/tree'
+    import Tab from './components/tab/Tab'
+    import {getTreeData,getTabLinks} from './vuex/getters'
     export default {
         components: {
-            Hello, forms,counter,tree
+            Hello, forms,counter,tree,Tab
         },
         store,
         data(){
@@ -25,35 +28,13 @@
                     forms:false,
                     counter:false,
                     tree:true
-                },
-                data:{
-                    name: 'My Tree',
-                    children: [
-                        {name: 'hello'},
-                        {name: 'wat'},
-                        {
-                            name: 'child folder',
-                            children: [
-                                {
-                                    name: 'child folder',
-                                    children: [
-                                        {name: 'hello'},
-                                        {name: 'wat'}
-                                    ]
-                                },
-                                {name: 'hello'},
-                                {name: 'wat'},
-                                {
-                                    name: 'child folder',
-                                    children: [
-                                        {name: 'hello'},
-                                        {name: 'wat'}
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
                 }
+            }
+        },
+        vuex:{
+            getters:{
+                treeData:getTreeData,
+                links:getTabLinks
             }
         }
     }
