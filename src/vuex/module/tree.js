@@ -35,10 +35,10 @@ const state = {
 };
 const mutations = {
     ADD_TAB_LINK({links},Addlink){
-        const index=links.findIndex(link=>link.pathName === Addlink.pathName);
-        if(index<0){
+        // const index=links.findIndex(link=>link.pathName === Addlink.pathName);
+        // if(index<0){
             links.push(Addlink)
-        }
+        // }
     },
     REMOVE_TAB_LINK({links},index){
         links.splice(index,1);

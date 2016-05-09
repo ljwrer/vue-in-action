@@ -4,10 +4,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import tree from './module/tree'
-import {TOGGLE} from './mutation-types'
+import tab from './module/tab'
 Vue.use(Vuex);
 const modules={
-    tree
+    tree,tab
 };
 const state={
     count:0,
@@ -27,4 +27,5 @@ const mutations={
 const store=new Vuex.Store({
   state,mutations,modules
 });
+window.store=store;
 export default store

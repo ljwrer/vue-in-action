@@ -2,7 +2,7 @@
     <div>
         <ul>
             <li v-for="link in links" transition="bounce" stagger="500">
-                <a v-link="link.pathName">{{link.name}}</a>
+                <a v-link="link.pathName" @click="activeLink($index)" :class="{'active':$index === active}">{{link.name}}</a>
                 <span @click="removeLink($index)">[x]</span>
             </li>
         </ul>
@@ -45,9 +45,13 @@
             transform: scale(0);
         }
     }
+    .active{
+        background: orange;
+    }
 </style>
 <script>
-    import {removeLink} from './../../vuex/actions'
+    import {removeLink,activeLink} from './../../vuex/actions'
+    import {getActiveLinkIndex} from './../../vuex/getters'
     export default{
         data(){
             return{
@@ -59,7 +63,10 @@
         },
         vuex:{
             actions:{
-                removeLink
+                removeLink,activeLink
+            },
+            getters:{
+                active:getActiveLinkIndex
             }
         }
     }
