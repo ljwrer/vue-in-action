@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 /* eslint-disable no-new */
 Vue.use(VueRouter);
 const router = new VueRouter();
-router.start(App,'#app');
 router.map({
     '/:path': {
         component: {
@@ -36,7 +35,8 @@ router.map({
                 }
             }
         }
-
     }
 });
+router.start(App,'#app');
 window.router=router;
+

@@ -5,7 +5,6 @@
             <a v-if="linkable" v-link="model.pathName" :class="{'link':linkable}" @click="addLink({'name':model.name,'pathName':model.pathName})">{{model.name}}</a>
             <span v-else :class="{'disable':disable}">{{model.name}}</span>
         </div>
-
         <ul v-show="open" v-if="model.children&&model.children.length" transition="expand" stagger="100">
             <tree
                 v-for="model in model.children"
