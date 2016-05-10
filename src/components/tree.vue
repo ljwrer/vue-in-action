@@ -61,7 +61,6 @@
     .toggle{
         cursor: pointer;
     }
-    /* 必需 */
     .expand-transition {
         transition: all .3s ease;
         padding: 20px;
@@ -71,9 +70,6 @@
             height: 30px;
         }
     }
-
-    /* .expand-enter 定义进入的开始状态 */
-    /* .expand-leave 定义离开的结束状态 */
     .expand-enter, .expand-leave {
         height: 0;
         padding: 0 20px;

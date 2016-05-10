@@ -8,7 +8,7 @@
 <script type="text/babel">
     import store from './vuex/store'
     import tree from './components/tree'
-    import Tab from './components/tab/Tab'
+    import Tab from './components/Tab'
     import {getTreeData,getTabLinks} from './vuex/getters'
     export default {
         components: {

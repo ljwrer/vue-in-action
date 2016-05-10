@@ -50,14 +50,9 @@
     }
 </style>
 <script>
-    import {removeLink,activeLink} from './../../vuex/actions'
-    import {getActiveLinkIndex} from './../../vuex/getters'
+    import {removeLink,activeLink} from './../vuex/actions'
+    import {getActiveLinkIndex} from './../vuex/getters'
     export default{
-        data(){
-            return{
-                msg:'hello vue'
-            }
-        },
         props:{
             links:Array
         },
