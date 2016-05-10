@@ -2,7 +2,6 @@
  * Created by Ray on 2016/5/5.
  */
 import * as types from './mutation-types'
-const router=window.router;
 export const incrementCounter=function ({dispatch,state}) {
     console.log(Object.keys(state))
     dispatch('INCREMENT')
